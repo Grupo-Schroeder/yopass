@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jhaals/yopass/master/logo/yopass-horizontal.png" alt="Yopass" width="420">
+  <img src="https://raw.githubusercontent.com/jhaals/yopass/master/website/public/yopass-full-dark.svg" alt="Yopass" width="420">
 </p>
 
 # Yopass — Compartir secretos de forma segura
