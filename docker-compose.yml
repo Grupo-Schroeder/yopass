@@ -1,0 +1,33 @@
+services:
+  memcached:
+    image: memcached:alpine
+    container_name: yopass-memcached
+    restart: unless-stopped
+    networks:
+      - yopass-internal
+
+  yopass:
+    image: jhaals/yopass:latest
+    container_name: yopass
+    restart: unless-stopped
+    command:
+      - --memcached=yopass-memcached:11211
+    depends_on:
+      - memcached
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.services.yopass.loadbalancer.server.port=1337"
+      - "traefik.http.routers.yopass.rule=Host(`yopass.test.lebensalud.com`)"
+      - "traefik.http.routers.yopass.service=yopass"
+    networks:
+      - yopass-internal
+      - traefik-public
+
+networks:
+  yopass-internal:
+    driver: bridge
+
+  traefik-public:
+    external: true
+
